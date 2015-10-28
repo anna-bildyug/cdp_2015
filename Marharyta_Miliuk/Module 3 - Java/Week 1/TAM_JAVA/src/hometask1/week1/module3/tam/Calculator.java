@@ -2,39 +2,31 @@ package hometask1.week1.module3.tam;
 
 public class Calculator {
 	
-	double fNumber = Runner.firstNumber;
-	double sNumber = Runner.secondNumber;
-	char oper = Runner.operation;
-	
-	public double performCalculation (double fNumber, double sNumber,char oper){
+	static int calculate (int firstNumber, int secondNumber, String operation){
 		
-		double result;
+		int result;
+		switch (operation){
 		
-		switch (this.oper){
+		case "+":
+		result = firstNumber + secondNumber;
+		return result;
 		
-		case '+':
-		result = this.fNumber + this.sNumber;
-		break;
-		
-	    case '-':
-		result = this.fNumber - this.sNumber;
+		case "-":
+		result = firstNumber - secondNumber;
 		return result;
 	
-		case '*':
-		result = this.fNumber * this.sNumber;
+		case "*":
+		result = firstNumber * secondNumber;
 		return result;
 			
-		case '/':
-		result = this.fNumber / this.sNumber;
+		case "/":
+		result = firstNumber / secondNumber;
 		return result;
-		
+				
 		default:
-			result = 0;
-			Console.output("Please, enter -, +, / or *");
-			return result;	
-		}
-		return result;
-		
+			result = 0;//initializing default value for the alternative scenario to handle
+			return result;
+					
+	}		
   }
-		
 }
