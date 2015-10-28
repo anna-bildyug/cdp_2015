@@ -1,65 +1,31 @@
 package by.epam.tat.lecture1.calculator;
-import java.util.Scanner;
 
 public class Calculator {
-	int value;
-	String action;
-	public Scanner in = new Scanner ( System.in );
-	
-	
-	public int getValue(){
-		
-		while(true) {
-			try{
-				System.out.println("Enter a value");
-				value = in.nextInt();
-				break;
-				}
-			catch (Throwable exc){
-				System.out.print("Incorrect value is entered. Try again. ");
-				in.nextLine();  // Consume newline left-over
-				}; 
-		}	
-		return value;
-	}
-	
-	public String getAction(){
-		System.out.println("Enter a action: * / + - ="); 
-		action = in.next();
-		return action;		
-	}
-	
-	public boolean repeatQuestion(){
-		System.out.println("Do you want to continue? Enter Y. Any other entering value results in stopping the program"); 
-		String answer = in.next();
-		if (answer.equalsIgnoreCase("y")){
-			return true;
-		} else {
-				return false;
-		}
-	}
 	
 	public void calculation() {
 		int result;
+		String action;
 		System.out.println("Calculator works with integer digits and simple actions: -, +, /, *.");
 		do {
-			result = getValue();
-			getAction();
-			while ( action.equals("=") == false){
+			result = Communicator.getValue();
+		//	Communicator.in.nextLine();  // Consume newline left-over
+			action = Communicator.getAction();
+			System.out.println(action);
+			while ( action.equals("=") != true){
 			try{
 				switch (action)
 					{
 						case "+":
-							result = (result + getValue());
+							result = (result + Communicator.getValue());
 							break;
 						case "-":
-							result = result - getValue(); 
+							result = result - Communicator.getValue(); 
 							break;			
 						case "*":
-							result = result * getValue(); 
+							result = result * Communicator.getValue(); 
 							break;	
 						case "/":
-							result = result / getValue();
+							result = result / Communicator.getValue();
 							break;		
 						default:
 							System.out.print("Error: action is incorrect. ");
@@ -69,18 +35,12 @@ public class Calculator {
 					System.out.println("Can't divide by Zero! Use another value");
 					continue;
 				}
-				getAction();
+			action = Communicator.getAction();
+			System.out.println(action);
 			}	
 			System.out.println("Result: " + result);
 		}
-		while ((repeatQuestion() == true));
+		while ((Communicator.repeatQuestion() == true));
 		System.out.println("The program is stopped");
-	}
-	
-	public static void main (String[] arg) {
-		Calculator calculator = new Calculator();
-		calculator.calculation();		
-		
-
 	}
 }

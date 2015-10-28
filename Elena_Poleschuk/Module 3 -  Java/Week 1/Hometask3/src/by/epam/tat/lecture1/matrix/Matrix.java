@@ -19,10 +19,19 @@ public class Matrix {
 		int nColumns = in.nextInt();
 		int[][] table1 = new int[nRow][nColumns];
 		System.out.println("Fill the matrix");
+		
 		for (int i = 0; i < nRow; i++){
-			for (int x = 0; x < nColumns; x++){
-				System.out.println("Enter " + (i+1) + " value in " + (x+1) + " row");
-				table1[i][x] = in.nextInt();
+			for (int x = 0; x < nColumns;){
+				try{
+					System.out.println("Enter " + (i+1) + " value in " + (x+1) + " row");
+					table1[i][x] = in.nextInt();
+					x++;
+				}
+				catch(java.util.InputMismatchException exc){
+					System.out.print("Error: Only integer can be used. ");
+					in.nextLine();  // Consume newline left-over
+					continue ;
+				}
 			}
 		}
 		System.out.println("The matrix is created");
