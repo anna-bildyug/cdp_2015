@@ -2,15 +2,15 @@ package hometask1.week1.module3.tam;
 
 public class Calculator {
 	
-	double fNumber = Runner.firstNumber;
+	double fNumber = Runner.firstNumber;//setting fields from Runner class
 	double sNumber = Runner.secondNumber;
 	char oper = Runner.operation;
 	
-	public double performCalculation (double fNumber, double sNumber,char oper){
+	public double performCalculation (double fNumber, double sNumber,char oper){//creating method using fields with data from Runner class
 		
 		double result=0;
 		
-		switch (oper){
+		switch (oper){//handling all possible operations 
 		
 		case '+':
 		result = fNumber + sNumber;
@@ -25,7 +25,7 @@ public class Calculator {
 		break;
 			
 		case '/':
-			if (sNumber == 0){
+			if (sNumber == 0){//handling case with dividing by zero
 				Console.output("It is forbidden to divide by zero!");
 				break;
 			}
@@ -34,7 +34,7 @@ public class Calculator {
 		       break;
 			}
 		default:
-			Console.output("Please, enter -, +, / or *");
+			Console.output("Please, enter -, +, / or *");//handling case when user types not one of the 4 operations
 		}
 		return result;
 		

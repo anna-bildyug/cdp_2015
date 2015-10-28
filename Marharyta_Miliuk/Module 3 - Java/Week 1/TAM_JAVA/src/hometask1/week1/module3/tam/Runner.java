@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Runner {
 		
-	public static double firstNumber;
+	public static double firstNumber;//defining fields for first and second numbers, operation
 	public static double secondNumber;
 	public static char  operation;
 
@@ -14,16 +14,16 @@ public class Runner {
 	   
 	   try{
 		Console.output("Please, enter first number");
-		firstNumber = Console.inputNumber();
+		firstNumber = Console.inputNumber();//getting first number using method from Console class
 		Console.output("Please, enter second number");
-		secondNumber = Console.inputNumber();
+		secondNumber = Console.inputNumber();//getting second number using method from Console class
 		Console.output("Please, enter operation");
-		operation  = Console.inputOperation();
+		operation  = Console.inputOperation();//getting operation using method from Console class
 		Calculator calculator = new Calculator();
-		Console.output("The result is: " + calculator.performCalculation(firstNumber, secondNumber, operation));
+		Console.output("The result is: " + calculator.performCalculation(firstNumber, secondNumber, operation));//starting execution of method from Calculator class using values from console
 	    }
 	    
-		catch (InputMismatchException e){
+		catch (InputMismatchException e){//catching exception that occurs when user types values with wrong type
 			Console.output("Wrong type! Please, enter number");
 		
 		}
