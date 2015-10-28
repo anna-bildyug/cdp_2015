@@ -2,31 +2,42 @@ package hometask1.week1.module3.tam;
 
 public class Calculator {
 	
-	static int calculate (int firstNumber, int secondNumber, String operation){
-		
-		int result;
-		switch (operation){
-		
-		case "+":
-		result = firstNumber + secondNumber;
-		return result;
-		
-		case "-":
-		result = firstNumber - secondNumber;
-		return result;
+	double fNumber = Runner.firstNumber;
+	double sNumber = Runner.secondNumber;
+	char oper = Runner.operation;
 	
-		case "*":
-		result = firstNumber * secondNumber;
-		return result;
+	public double performCalculation (double fNumber, double sNumber,char oper){
+		
+		double result=0;
+		
+		switch (oper){
+		
+		case '+':
+		result = fNumber + sNumber;
+		break;
+		
+	    case '-':
+		result = fNumber - sNumber;
+		break;
+	
+		case '*':
+		result = fNumber * sNumber;
+		break;
 			
-		case "/":
-		result = firstNumber / secondNumber;
-		return result;
-				
+		case '/':
+			if (sNumber == 0){
+				Console.output("It is forbidden to divide by zero!");
+				break;
+			}
+			else{
+		       result = fNumber / sNumber;
+		       break;
+			}
 		default:
-			result = 0;//initializing default value for the alternative scenario to handle
-			return result;
-					
-	}		
+			Console.output("Please, enter -, +, / or *");
+		}
+		return result;
+		
   }
+		
 }
