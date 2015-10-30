@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class List {
 	
-	public void createList(){
+	public static String[] createList(){
 		Scanner in = new Scanner (System.in);
 		System.out.println("How many strings do you want to create?");
 		int nString = in.nextInt();
@@ -20,14 +20,15 @@ public class List {
 			System.out.println("Enter " + (n + 1) + " srting");
 			masStrings[n] = in.nextLine();	
 		}	
-		System.out.println("The List is created");
+		System.out.println("The List is created:");
 		System.out.println("-----------------");
+		System.out.println();
 		in.close();
-		printList(masStrings);
-		sorting(masStrings);
+		return masStrings;
 	}	
 		
-	public void sorting(String[] list){
+	
+	public static String[]  sortList(String[] list){
 		for (int x = 0; x < list.length - 1; x++){
 			for (int n = list.length-1; n > 0 ; n--){
 				if (list[n].length() < list[n-1].length()){
@@ -37,20 +38,23 @@ public class List {
 				}
 			}	
 		}
-		System.out.println("The List is sorted");
-		System.out.println("-----------------");
-		printList(list);
+		return list;
 	}	
 
-	public void printList(String[] list){
+	public static void printList(String[] list){
 		for (int n = 0; n < list.length; n++){
 			System.out.println(list[n]);
 		}			
 	}
 	
-	
 	public static void main (String[] arg){
-		List sortingList = new List();
-		sortingList.createList();
+		String masStringsInitial[] = createList();
+		System.out.println("Initial List:");
+		printList(masStringsInitial);
+		
+		String masStringsSorted[] = sortList(masStringsInitial);
+		System.out.println();
+		System.out.println("Sorted list:");
+		printList(masStringsSorted);
 	}
 }
