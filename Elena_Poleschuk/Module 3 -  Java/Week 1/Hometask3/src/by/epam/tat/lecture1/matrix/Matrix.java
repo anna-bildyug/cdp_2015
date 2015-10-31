@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Matrix {
 	
-	public void createMatrix(){
+	public static int[][] createMatrix(){
 		Scanner in = new Scanner ( System.in );
 		System.out.println("How many rows in matrix do you want?");
 		int nRow = in.nextInt();
@@ -34,14 +34,13 @@ public class Matrix {
 				}
 			}
 		}
+		in.close();
 		System.out.println("The matrix is created");
 		System.out.println("-----------------");
-		in.close();
-		viewMatrix(table1);
-		turnMatrix90Degrees(table1);
+		return table1;
 	}
 	
-	public void viewMatrix(int[][] table){ //print matrix
+	public static void viewMatrix(int[][] table){ //print matrix
 		int tablLeng1 = table.length;
 		int tablLeng2 = table[0].length;
 		for (int i = 0; i < tablLeng1; i++){
@@ -52,7 +51,7 @@ public class Matrix {
 		}
 	}
 	
-	public void turnMatrix90Degrees(int[][] table){ // Turn a matrix on 90 degrees clockwise 
+	public static int[][] turnMatrix90Degrees(int[][] table){ // Turn a matrix on 90 degrees clockwise 
 		int tablLeng1 = table.length;
 		int tablLeng2 = table[0].length;
 		int table2[][] = new int [tablLeng2][tablLeng1];
@@ -63,13 +62,17 @@ public class Matrix {
 				n++;
 			}			
 		}
-		System.out.println("The matrix is turned");
-		System.out.println("-----------------");
-		viewMatrix(table2);
+		return table2;
 	}
 
 	public static void main(String[] arg){
-		Matrix matrix = new Matrix();
-		matrix.createMatrix();
+		int[][] tableInitial = createMatrix();
+		System.out.println("Initial matrix:");
+		viewMatrix(tableInitial);
+		System.out.println();
+		
+		int[][] tableTurned = turnMatrix90Degrees(tableInitial);
+		System.out.println("Matrix is turned on 90 degrees clockwise:");
+		viewMatrix(tableTurned);
 	}
 }
