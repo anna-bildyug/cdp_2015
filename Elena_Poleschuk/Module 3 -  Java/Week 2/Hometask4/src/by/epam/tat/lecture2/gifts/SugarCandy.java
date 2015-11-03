@@ -8,8 +8,15 @@ public class SugarCandy extends Sweets{
 		this.lollipop = lollipop;
 	}
 		
-	public boolean getLollipop(){
+	private boolean isLollipop(){
 		return lollipop;
 	}
+	private void setLollipop (boolean lollipop){
+		this.lollipop = lollipop;
+	}
 
+	public String getInfo(){
+		return super.getInfo()
+				+", lollipop: " + this.lollipop;
+	}
 }

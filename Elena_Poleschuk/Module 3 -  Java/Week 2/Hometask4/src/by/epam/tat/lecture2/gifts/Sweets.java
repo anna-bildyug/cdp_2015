@@ -1,6 +1,6 @@
 package by.epam.tat.lecture2.gifts;
 
-public class Sweets {
+public abstract class Sweets {
 	protected String sweetName;
 	protected String producerName;
 	protected int price;
@@ -13,7 +13,7 @@ public class Sweets {
 		this.weight = weight;
 	}
 	
-	public String sweetName(){
+	public String getSweetName(){
 		return sweetName;
 	}
 	
@@ -29,7 +29,7 @@ public class Sweets {
 		return weight;
 	}
 	
-	public void sweetName(String sweetName){
+	public void setSweetName(String sweetName){
 		this.sweetName = sweetName;
 	}
 	
@@ -45,6 +45,9 @@ public class Sweets {
 		this.weight = weight;
 	}
 	
+	public String getInfo(){
+		return "Name: " + this.sweetName + ", Producer: " + this.producerName + ", Price: " + this.price + ", Weight: " + this.weight;
+	}
 }
 
 
