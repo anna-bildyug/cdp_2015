@@ -1,41 +1,62 @@
 package present.newyearpresent;
-import java.util.*;
 
-import present.console.InputOutputStreams;
+import java.util.*;
+import java.util.stream.Collectors;
+import console.newyearpresent.InputOutputStreams;
 import sweets.newyearpresent.*;
 
 
-public class Present {
+public class Present{
 	
-	public int askNumberOfCandies (){
-		InputOutputStreams.printMessage("How many candies do you want?");
+	public static ArrayList<Sweets> collection = new ArrayList<Sweets>();//creating public field for collection
+	
+	public static Comparator<Sweets> SweetsNameComparator = new Comparator<Sweets>() {//creating and defining comparator field to use it in the sorting
+		
+	    public int compare(Sweets candy1, Sweets candy2) {
+
+	    String candyName1 = candy1.getName().toUpperCase();
+	    String candyName2 = candy2.getName().toUpperCase();
+
+	    return candyName1.compareTo(candyName2);
+	    }
+	 };
+	
+	public int askNumberOfCandies (){//creating method do define number of candies to put into present
+		
+		System.out.println("How many candies do you want?");
+		
 		return InputOutputStreams.scanNumbers();
 	}
 	
-	public ArrayList<Object> putCandiesIntoPresent(){
-		ArrayList<Object> collection = new ArrayList<Object>();
-		int number = askNumberOfCandies();
-		for (int i = 0; i < number; i++){
-			InputOutputStreams.printMessage("Enter type of candy you want (Bar, Lollypop or Chocolate Candy)");
-			String typeOfCandy = InputOutputStreams.scanMessage();
-			InputOutputStreams.printMessage("Enter" + " " + (i+1)+ " " + "candy you want to add to your present");
-			String nameOfCandy = InputOutputStreams.scanMessage();
-			switch(typeOfCandy){
-			case "Bar":
-				collection.add(new Bar(nameOfCandy));
-				break;
-			case "Lollypop":
-				collection.add(new Lollypop(nameOfCandy));
-				break;
-			case "Chocolate Candy":
-				collection.add(new ChocolateCandy(nameOfCandy));
-				break;
-			default:
-				InputOutputStreams.printMessage("Please, enter Bar, Lollypop or Chocolate Candy");
-			}	
-		}
-		return collection;
-			
-	}
-
+	public void sortCollection(){//creating method to sort candies in the present by names alphabetically
+		
+	    Collections.sort(collection, SweetsNameComparator);
+	         for (Sweets e:collection){
+		         InputOutputStreams.printObject(e);
+	         }	
+    }
+	
+    public void findCandy (){//creating method to find candy with exact name entered by user and print it to the console
+    
+        InputOutputStreams.printMessage("Which candy do you want to eat?");
+        String candyName = InputOutputStreams.scanMessage();
+    
+         List<Sweets> foundCandy = 
+    	    collection.stream().
+    	    filter((sweets)-> sweets.getName()
+    	    		.equals((candyName)))
+    	    .collect(Collectors.toList());
+    
+       InputOutputStreams.printCollection(foundCandy);
+    }
+    
+	public void findPresentsWeight (){//creating method to count presents weight
+		
+    	int findPresentWeight = 0;
+    	
+    	     for (Sweets candy: collection){
+    		     findPresentWeight += candy.getWeight();
+    	     }
+    	 InputOutputStreams.printMessage("The weight of your present is: " + findPresentWeight);
+    }
 }
