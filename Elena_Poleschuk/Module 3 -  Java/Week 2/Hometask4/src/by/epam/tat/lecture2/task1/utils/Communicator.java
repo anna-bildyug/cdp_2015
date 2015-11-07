@@ -1,13 +1,11 @@
-package by.epam.tat.lecture2.gifts;
+package by.epam.tat.lecture2.task1.utils;
 
 import java.util.Scanner;
 
 public class Communicator {
 	
-	
-	public static boolean getFlag(String textToCosole){
+	public static boolean getFlag(){
 		Scanner in = new Scanner ( System.in );
-		System.out.println(textToCosole); 
 		String answerContinue = in.next();
 		if (answerContinue.equalsIgnoreCase("y")){
 			return true;
@@ -35,13 +33,7 @@ public class Communicator {
 	
 	public static String stringScanner(){
 		Scanner in = new Scanner(System.in);
-		String stringValue = null;
-		try{
-			stringValue = in.nextLine();
-		}
-		catch (Throwable exc){
-			System.out.println("Error: only Integer can be used");
-		}
+		String stringValue = in.nextLine();
 		return stringValue;
 	}	
 	

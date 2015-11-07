@@ -1,4 +1,4 @@
-package by.epam.tat.lecture2.gifts;
+package by.epam.tat.lecture2.task1.objects;
 
 public class ChocolateCandy extends Sweets{
 

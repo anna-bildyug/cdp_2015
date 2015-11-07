@@ -1,7 +1,8 @@
-package by.epam.tat.lecture2.comparators;
+package by.epam.tat.lecture2.task1.utils;
 
 import java.util.Comparator;
-import by.epam.tat.lecture2.gifts.Sweets;
+
+import by.epam.tat.lecture2.task1.objects.Sweets;
 
 public class PriceComparator implements Comparator<Sweets>{
 	public int compare(Sweets o1, Sweets o2){

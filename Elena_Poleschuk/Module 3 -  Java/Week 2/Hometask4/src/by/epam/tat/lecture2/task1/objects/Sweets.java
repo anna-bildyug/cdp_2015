@@ -1,4 +1,4 @@
-package by.epam.tat.lecture2.gifts;
+package by.epam.tat.lecture2.task1.objects;
 
 public abstract class Sweets {
 	protected String sweetName;
@@ -45,7 +45,7 @@ public abstract class Sweets {
 		this.weight = weight;
 	}
 	
-	public String getInfo(){
+	public String toString(){
 		return "Name: " + this.sweetName + ", Producer: " + this.producerName + ", Price: " + this.price + ", Weight: " + this.weight;
 	}
 }
