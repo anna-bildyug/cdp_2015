@@ -1,12 +1,12 @@
 package by.epam.tat.lecture2.task2.lists;
 
-import java.util.HashSet;
 import java.util.Random;
+import java.util.TreeSet;
 
-public class TreeSetList {
-	HashSet<Integer> treeSet = new HashSet<Integer>();
+public class TreeSetCollection {
+	private TreeSet<Integer> treeSet = new TreeSet<Integer>();
 
-	public void createHashSet(int value){
+	public void fillCollection(int value){
 		for (int i = 0; i < value; i++){
 			Integer d = new Random().nextInt();
 			treeSet.add(d);
@@ -28,4 +28,14 @@ public class TreeSetList {
 		}
 		return valueFound;
 	}
+	
+	//delete element
+	public boolean removeValue(int value){
+		boolean valueIsDeleted = false;
+		if (treeSet.remove(value)){
+			valueIsDeleted = true;
+		}
+		return valueIsDeleted;
+	}
 }
+

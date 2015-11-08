@@ -11,6 +11,7 @@ public class Runner {
 		Gift gift = new Gift();
 		int action;
 		boolean exit = false;
+		Communicator.openScanner();
 		while (exit == false){
 			// menu
 			Communicator.out("\n---MENU--- \nPress number of action");
@@ -22,7 +23,7 @@ public class Runner {
 			Communicator.out("6. Exit");
 			while(true){
 				action = Communicator.intScanner();	
-				if (action < 7){
+				if (action < 7 && action > 0 ){
 					break;
 				}else {
 					Communicator.out("Enter existed number of action");
@@ -39,6 +40,7 @@ public class Runner {
 						boolean answer;
 						Communicator.out("Press \"Y\" to add Sugar Candy. Press any other kay to add Chocolate Candy");
 						answer = Communicator.getFlag();
+						Communicator.stringScanner(); // Consume newline left-over
 						Communicator.out("Enter name");
 						String sweetName = Communicator.stringScanner();
 						Communicator.out("Enter producer");
@@ -56,6 +58,7 @@ public class Runner {
 							} else {
 								lollipop = false;
 							}
+							Communicator.stringScanner(); // Consume newline left-over
 							Communicator.out("Enter flavour of candy");
 							flavour = Communicator.stringScanner();
 							gift.addSweet(new SugarCandy(sweetName, sweetProducer, price, weight, lollipop, flavour));	
@@ -90,17 +93,17 @@ public class Runner {
 						}else {
 							Communicator.out("Enter existed number of action");
 						}
-						switch (action)
-						{
-							case 1:
-								gift.sortByName();
-								break;
-							case 2:
-								gift.sortByPrice();
-								break;			
-							default:
-								gift.sortByWeight();
-						}
+					}
+					switch (action)
+					{
+						case 1:
+							gift.sortByName();
+							break;
+						case 2:
+							gift.sortByPrice();
+							break;			
+						default:
+							gift.sortByWeight();	
 					}
 					break;		
 				case 5:
@@ -112,7 +115,9 @@ public class Runner {
 					exit = true;
 					Communicator.out("--Exit--");
 			}
+			
 		}
+		Communicator.closeScanner();
 	}
 		
 }

@@ -4,8 +4,20 @@ import java.util.Scanner;
 
 public class Communicator {
 	
+	 private static Scanner in;
+	 
+	 public static void openScanner()
+	 {
+	  in = new Scanner(System.in);
+	 }
+	 
+	 public static void closeScanner()
+	 {
+	  in.close();
+	 }
+	
 	public static boolean getFlag(){
-		Scanner in = new Scanner ( System.in );
+	//	Scanner in = new Scanner ( System.in );
 		String answerContinue = in.next();
 		if (answerContinue.equalsIgnoreCase("y")){
 			return true;
@@ -15,7 +27,7 @@ public class Communicator {
 	}
 		
 	public static int intScanner(){
-		Scanner in = new Scanner(System.in);
+	//	Scanner in = new Scanner(System.in);
 		int intValue = 0;
 		boolean a = true;
 		while (a){
@@ -32,7 +44,7 @@ public class Communicator {
 	}	
 	
 	public static String stringScanner(){
-		Scanner in = new Scanner(System.in);
+	//	Scanner in = new Scanner(System.in);
 		String stringValue = in.nextLine();
 		return stringValue;
 	}	

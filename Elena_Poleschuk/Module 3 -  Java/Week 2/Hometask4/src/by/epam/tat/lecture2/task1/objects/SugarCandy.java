@@ -30,7 +30,9 @@ public class SugarCandy extends Sweets{
 		return super.toString()
 				+", lollipop: " + this.lollipop;
 	}
+	
+	@Override
 	public String toString(){
-		return super.toString() + ", lollipop: " + this.lollipop;
+		return super.toString() + ", lollipop: " + this.lollipop + ", flavour: " + this.flavour;
 	}
 }

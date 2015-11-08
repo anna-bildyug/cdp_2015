@@ -11,7 +11,7 @@ import by.epam.tat.lecture2.task1.utils.WeightComparator;
 
 public class Gift {	
 	// collection
-	List<Sweets> sweetCollection = new ArrayList<Sweets>();
+	private List<Sweets> sweetCollection = new ArrayList<Sweets>();
 	
 	
 	// add sweet to gift
@@ -19,6 +19,7 @@ public class Gift {
 		sweetCollection.add(sweet);
 	}
 	
+
 	//show the collection
 	
 	public void printGiftInfo(){
