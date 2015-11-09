@@ -3,11 +3,11 @@ package by.epam.tat.lecture2.task2.lists;
 import java.util.HashSet;
 import java.util.Random;
 
-public class HashSetList {
+public class HashSetCollection {
 
-	HashSet<Integer> hashSet = new HashSet<Integer>();
+	private HashSet<Integer> hashSet = new HashSet<Integer>();
 
-	public void createHashSet(int value){
+	public void fillCollection(int value){
 		for (int i = 0; i < value; i++){
 			Integer d = new Random().nextInt();
 			hashSet.add(d);
@@ -28,6 +28,15 @@ public class HashSetList {
 			}
 		}
 		return valueFound;
+	}
+	
+	//delete element
+	public boolean removeValue(int value){
+		boolean valueIsDeleted = false;
+		if (hashSet.remove(value)){
+			valueIsDeleted = true;
+		}
+		return valueIsDeleted;
 	}
 	
 }
