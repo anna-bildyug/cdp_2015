@@ -1,0 +1,5 @@
+Name: hj, Producer: lk, Price: 9, Weight: 7, lollipop: false, flavour: i
+Name: , Producer: h, Price: 9, Weight: 8
+Name: hj, Producer: lk, Price: 9, Weight: 7, lollipop: false, flavour: i
+Name: , Producer: h, Price: 9, Weight: 8
+Name: j, Producer: h, Price: 7, Weight: 6, lollipop: false, flavour: j
