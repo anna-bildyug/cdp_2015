@@ -1,10 +1,6 @@
 package by.epam.tat.lecture2.task1.objects;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,13 +16,35 @@ public class Gift {
 	
 	
 	// add sweet to gift
-	public void addSweet (Sweets sweet){
+	/*public void addSweet (Sweets sweet){
 		sweetCollection.add(sweet);
+	}*/
+	
+	
+	public void addSweet(String sweetName, String sweetProducer, int price, int weight, boolean lollipop, String flavour){
+		if (flavour != null){
+			sweetCollection.add(new SugarCandy(sweetName, sweetProducer, price, weight, lollipop, flavour));
+		}else{
+			sweetCollection.add(new ChocolateCandy(sweetName, sweetProducer, price, weight));
+		}
+	}
+	
+	
+	
+	//take the collection as matrix
+	public String[] takeCollectionMatrix(){
+		int n = sweetCollection.size();
+		int row = 0;
+		String[] collection = new String[n];
+		 for (Sweets i : sweetCollection){
+			 collection[row] = i.toString();
+			 row++;
+		 }
+		return collection;
 	}
 	
 
 	//show the collection
-	
 	public void printGiftInfo(){
 		 if(sweetCollection.isEmpty())
 		 {
@@ -86,58 +104,7 @@ public class Gift {
 		printGiftInfo();
 	}
 
-	//out
-	public void writeFile(String file) throws IOException{
-		PrintWriter outPutStream = null;
-		try{
-			outPutStream = new PrintWriter(new FileWriter(file));
-			for (Sweets i : sweetCollection){
-				String temp = i.toString();
-				outPutStream.println(temp);	
-			}
-			
-		} finally {
-			if (outPutStream != null){
-				outPutStream.close();
-			}
-		}
-	}
-	
-	//in
-	public void readFile(String file) throws IOException{
-		BufferedReader inPutStream = null;
-		try{
-			inPutStream = new BufferedReader(new FileReader(file));
-			String line;
-			String[] isLineParts;
-			String sweetName;
-			String producerName;
-			int price;
-			int weight;
-			while ((line = inPutStream.readLine()) != null){
-				isLineParts = line.split(", ");
-				sweetName = isLineParts[0].substring(6);
-				producerName = isLineParts[1].substring(10);
-				price = Integer.parseInt(isLineParts[2].substring(7));
-				weight = Integer.parseInt(isLineParts[3].substring(8));
 
-
-				if (isLineParts.length > 4){
-					boolean lollipop = Boolean.parseBoolean(isLineParts[4].substring(10));
-					String flavour = isLineParts[5].substring(9);
-					addSweet(new SugarCandy(sweetName, producerName, price, weight, lollipop, flavour));
-				} else {
-					addSweet(new ChocolateCandy(sweetName, producerName, price, weight));	
-					
-				}
-			}
-			
-		} finally {
-			if (inPutStream != null){
-				inPutStream.close();
-			}
-		}
-	}
 	
 		
 }

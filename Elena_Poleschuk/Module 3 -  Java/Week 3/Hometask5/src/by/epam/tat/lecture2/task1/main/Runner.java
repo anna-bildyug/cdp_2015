@@ -1,20 +1,48 @@
 package by.epam.tat.lecture2.task1.main;
 
-import java.io.IOException;
-
-import by.epam.tat.lecture2.task1.objects.ChocolateCandy;
 import by.epam.tat.lecture2.task1.objects.Gift;
-import by.epam.tat.lecture2.task1.objects.SugarCandy;
 import by.epam.tat.lecture2.task1.utils.Communicator;
-import by.epam.tat.lecture2.task1.utils.Exceptions;
+import by.epam.tat.lecture2.task1.utils.IOFile;
 
 
 public class Runner {
-
+	public static int sortGift(){
+		int action;
+		while(true){
+			action = Communicator.intScanner();	
+			if (action < 4 && action > 0 ){
+				break;
+			}else {
+				Communicator.out("Enter existed number of action");
+			}
+		}
+		return action;
+	}
+	
+	public static int selectMenuAction(){
+		int action;
+		while(true){
+			action = Communicator.intScanner();	
+			if (action < 9 && action > 0 ){
+				break;
+			}else {
+				Communicator.out("Enter existed number of action");
+			}
+		}
+		return action;
+	}
+	
+	
 	public static void main(String[] args) {
 		Gift gift = new Gift();
 		int action;
-		String file = "log.txt";
+		String sweetName;
+		String sweetProducer;
+		int price;
+		int weight;
+		boolean lollipop;
+		String flavour;
+		final String file = "log.txt";
 		boolean exit = false;
 		Communicator.openScanner();
 		while (exit == false){
@@ -25,19 +53,10 @@ public class Runner {
 			Communicator.out("3. Calculate Weight of the Gift");
 			Communicator.out("4. Sort Sweets in the Gift");
 			Communicator.out("5. Find sweet");
-			Communicator.out("6. Save gift");
+			Communicator.out("6. Save gift into file");
 			Communicator.out("7. Open saved gift");
 			Communicator.out("8. Exit");
-			while(true){
-				action = Communicator.intScanner();	
-				if (action < 9 && action > 0 ){
-					break;
-				}else {
-					Communicator.out("Enter existed number of action");
-				}
-			}
-			
-			
+			action = selectMenuAction();
 			switch (action)
 			{
 				case 1:
@@ -46,21 +65,19 @@ public class Runner {
 					while (addingContinue) {
 						boolean answer;
 						Communicator.out("Press \"Y\" to add Sugar Candy. Press any other kay to add Chocolate Candy");
-						answer = Communicator.getFlag();
+						answer = Communicator.getFlag();	
 						Communicator.stringScanner(); // Consume newline left-over
 						Communicator.out("Enter name");
-						String sweetName = Communicator.stringScanner();
+						sweetName = Communicator.stringScanner();
 						Communicator.out("Enter producer");
-						String sweetProducer = Communicator.stringScanner();
+						sweetProducer = Communicator.stringScanner();
 						Communicator.out("Enter price");
-						int price = Communicator.intScanner();
+						price = Communicator.intScanner();
 						Communicator.out("Enter weight");
-						int weight = Communicator.intScanner();
+						weight = Communicator.intScanner();
 						if (answer == true){
-							boolean lollipop;
-							String flavour;
 							Communicator.out("Enter \"Y\" if the sweet with stick. Press any other kay if not");
-							if (Communicator.getFlag() == true){
+							if (Communicator.getFlag()){
 								lollipop = true;
 							} else {
 								lollipop = false;
@@ -68,9 +85,9 @@ public class Runner {
 							Communicator.stringScanner(); // Consume newline left-over
 							Communicator.out("Enter flavour of candy");
 							flavour = Communicator.stringScanner();
-							gift.addSweet(new SugarCandy(sweetName, sweetProducer, price, weight, lollipop, flavour));	
+							gift.addSweet(sweetName, sweetProducer, price, weight, lollipop, flavour);	
 						} else {
-							gift.addSweet(new ChocolateCandy(sweetName, sweetProducer, price, weight));
+							gift.addSweet(sweetName, sweetProducer, price, weight, false, null);
 						}
 						Communicator.out("________________\nPress \"Y\" to add a new sweet. Press any other kay to stop");
 						addingContinue = Communicator.getFlag();
@@ -93,15 +110,7 @@ public class Runner {
 					Communicator.out("1. by Name");
 					Communicator.out("2. by Price");
 					Communicator.out("3. by Weigth");
-					while(true){
-						action = Communicator.intScanner();	
-						if (action < 4){
-							break;
-						}else {
-							Communicator.out("Enter existed number of action");
-						}
-					}
-					switch (action)
+					switch (sortGift())
 					{
 						case 1:
 							gift.sortByName();
@@ -111,35 +120,38 @@ public class Runner {
 							break;			
 						default:
 							gift.sortByWeight();	
-					}
+					};
 					break;		
 				case 5:
 					Communicator.out("--Find sweet--");
+					Communicator.stringScanner(); // Consume newline left-over
 					Communicator.out("Enter a name of sweet to find other information about it:");
 					gift.giveSweetByName(Communicator.stringScanner());
 					break;
 					
 				case 6:
-					Communicator.out("--Save gift--");
-					try {
-						gift.writeFile(file);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					Communicator.out("--Save gift into file--");
+					IOFile saveGiftInfoToFile = new IOFile();
+					saveGiftInfoToFile.saveInfo(file, gift.takeCollectionMatrix());
 					Communicator.out("The gift is saved");
 					break;
 				case 7:
 					Communicator.out("--Open saved gift--");
-					try {
-						Exceptions.isExistFile(file);
-						gift.readFile(file);
-						Communicator.out("You can worked with previously saved gift");
-					} catch (IOException e) {
-						e.printStackTrace();
+					IOFile exportGiftFromInfo = new IOFile();
+					String[][] giftCollectionMatrix = exportGiftFromInfo.getSavedGiftInfo(file);
+					for (int i = 0; i < giftCollectionMatrix.length;i++){
+						sweetName = giftCollectionMatrix[i][0];
+						sweetProducer = giftCollectionMatrix[i][1];
+						price = Integer.parseInt(giftCollectionMatrix[i][2]);
+						weight = Integer.parseInt(giftCollectionMatrix[i][3]);
+						lollipop = Boolean.parseBoolean(giftCollectionMatrix[i][3]);
+						flavour = giftCollectionMatrix[i][3];
+						gift.addSweet(sweetName, sweetProducer, price, weight, lollipop, flavour);	
 					}
+					;
+
+					Communicator.out("You can work with previously saved gift");
 					break;		
-					
-					
 				default:
 					exit = true;
 					Communicator.out("--Exit--");
@@ -147,11 +159,6 @@ public class Runner {
 			
 		}
 		Communicator.closeScanner();
-		
-
-		
-		
 
 	}
-		
 }
