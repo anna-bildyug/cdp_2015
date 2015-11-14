@@ -1,4 +1,4 @@
-package by.epam.tat.lecture2.task1.utils;
+package by.epam.tat.lecture2.task1.utils.comparators;
 
 import java.util.Comparator;
 
