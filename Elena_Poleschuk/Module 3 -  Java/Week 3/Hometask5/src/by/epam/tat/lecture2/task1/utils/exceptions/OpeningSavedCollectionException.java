@@ -4,7 +4,7 @@ package by.epam.tat.lecture2.task1.utils.exceptions;
 public class OpeningSavedCollectionException extends RuntimeException{
 
 	public String getMessage() {
-		return "Gift is not oppened";
+		return "Gift doesn't open";
 	}	
 	
 }
