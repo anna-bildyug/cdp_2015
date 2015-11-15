@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gift>
+	<sweet>
+		<sweetName>Mishka</sweetName>
+		<producerName>Kamunarka</producerName>
+		<price>10</price>
+		<weight>5</weight>	
+	</sweet>
+	<sweet>
+		<sweetName>Shokolapka</sweetName>
+		<producerName>Roshen</producerName>
+		<price>4</price>
+		<weight>5</weight>	
+	</sweet>
+	<sweet>
+		<sweetName>Barbaris</sweetName>
+		<producerName>Spartak</producerName>
+		<price>6</price>
+		<weight>10</weight>	
+	</sweet>
+</gift>
