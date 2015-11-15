@@ -1,0 +1,9 @@
+package by.epam.tat.lecture2.task1.utils.exceptions;
+
+@SuppressWarnings("serial")
+public class EmptyCollectionException extends RuntimeException {
+
+	public EmptyCollectionException(String errorMessage){
+		super(errorMessage);
+	}
+}
