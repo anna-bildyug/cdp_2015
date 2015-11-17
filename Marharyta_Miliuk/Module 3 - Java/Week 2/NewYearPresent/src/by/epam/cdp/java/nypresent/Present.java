@@ -1,16 +1,18 @@
 package by.epam.cdp.java.nypresent;
 
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 import by.epam.cdp.java.nypresent.beans.*;
-import by.epam.cdp.java.nypresent.utils.InputOutputStreams;
+import by.epam.cdp.java.nypresent.utils.PrinterScanner;
 import by.epam.cdp.java.nypresent.validation.NoSuchCandyException;
 
 
 public class Present{
 	
-	public ArrayList<Sweets> collection = new ArrayList<Sweets>();//creating public field for collection
+	
+	public List<Sweets> collection = new ArrayList<Sweets>();//creating public field for collection
 	
 	public Comparator<Sweets> SweetsNameComparator = new Comparator<Sweets>() {//creating and defining comparator field to use it in the sorting
 		
@@ -23,38 +25,38 @@ public class Present{
 	    }
 	 };
 	
+	 public List<Sweets> getColection()
+	 {
+		 return this.collection;
+	 }
+	 
 	public void sortCollectionByName(){//creating method to sort candies in the present by names alphabetically
 		
 	    Collections.sort(collection, SweetsNameComparator);
-	         for (Sweets e:collection){
-		         InputOutputStreams.printObject(e);
-	         }	
     }
 	
-    public void findCandyByName (String candyName)throws NoSuchCandyException{//creating method to find candy with exact name entered by user and print it to the console
-         List<Sweets> foundCandy = 
-    	    collection.stream().
-    	    filter((sweets)-> sweets.getName()
-    	    		.equals((candyName)))
-    	    .collect(Collectors.toList());
-         
-         if (candyName != foundCandy.toString()){
-        	 throw new NoSuchCandyException ("You don't have such candy in your present!");
+    public List<Sweets> findCandyByName (String candyName)throws NoSuchCandyException{//creating method to find candy with exact name entered by user and print it to the console
+        
+		List<Sweets> foundCandy = collection.stream()
+				.filter((sweets) -> sweets.getName().equals((candyName)))
+				.collect(Collectors.toList());
+
+         if (!foundCandy.isEmpty()){
+        	 
+        	 return foundCandy;
          }
-         
-         else{
-    
-            InputOutputStreams.printCollection(foundCandy);
-         }
+         else {
+        	 throw new NoSuchCandyException();
+         } 		
     }
     
-	public void getPresentsWeight (){//creating method to count presents weight
+	public int getPresentsWeight (){//creating method to count presents weight
 		
     	int presentWeight = 0;
     	
     	     for (Sweets candy: collection){
     		     presentWeight += candy.getWeight();
     	     }
-    	 InputOutputStreams.printMessage("The weight of your present is: " + presentWeight);
+    	return presentWeight;
     }
 }
