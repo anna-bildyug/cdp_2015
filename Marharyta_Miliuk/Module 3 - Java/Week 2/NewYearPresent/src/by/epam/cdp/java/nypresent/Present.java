@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import by.epam.cdp.java.nypresent.beans.*;
 import by.epam.cdp.java.nypresent.utils.InputOutputStreams;
+import by.epam.cdp.java.nypresent.validation.NoSuchCandyException;
 
 
 public class Present{
@@ -30,24 +31,30 @@ public class Present{
 	         }	
     }
 	
-    public void findCandyByName (String candyName){//creating method to find candy with exact name entered by user and print it to the console
-    
+    public void findCandyByName (String candyName)throws NoSuchCandyException{//creating method to find candy with exact name entered by user and print it to the console
          List<Sweets> foundCandy = 
     	    collection.stream().
     	    filter((sweets)-> sweets.getName()
     	    		.equals((candyName)))
     	    .collect(Collectors.toList());
+         
+         if (candyName != foundCandy.toString()){
+        	 throw new NoSuchCandyException ("You don't have such candy in your present!");
+         }
+         
+         else{
     
-       InputOutputStreams.printCollection(foundCandy);
+            InputOutputStreams.printCollection(foundCandy);
+         }
     }
     
 	public void getPresentsWeight (){//creating method to count presents weight
 		
-    	int findPresentWeight = 0;
+    	int presentWeight = 0;
     	
     	     for (Sweets candy: collection){
-    		     findPresentWeight += candy.getWeight();
+    		     presentWeight += candy.getWeight();
     	     }
-    	 InputOutputStreams.printMessage("The weight of your present is: " + findPresentWeight);
+    	 InputOutputStreams.printMessage("The weight of your present is: " + presentWeight);
     }
 }
