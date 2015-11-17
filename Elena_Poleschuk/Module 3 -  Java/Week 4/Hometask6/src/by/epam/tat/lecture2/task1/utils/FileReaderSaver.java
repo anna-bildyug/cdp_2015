@@ -17,7 +17,6 @@ import by.epam.tat.lecture2.task1.utils.exceptions.OpeningSavedCollectionExcepti
 
 public class FileReaderSaver implements IReaderSaver {
 	public final static String FILE = "log.txt";
-	/// if no sweets
 	@Override
 	public void saveGift(Gift gitf) {
 		List<Sweets> sweets = gitf.getSweets();
