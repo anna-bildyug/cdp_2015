@@ -1,10 +1,14 @@
 package by.epam.tat.lecture2.task1.utils.exceptions;
 
 @SuppressWarnings("serial")
-public class OpeningSavedCollectionException extends RuntimeException{
+public class OpeningSavedCollectionException extends Exception{
 
-	public String getMessage() {
-		return "Gift is not oppened";
-	}	
+	public OpeningSavedCollectionException(String message){
+		super(message);
+	}
+
+	public OpeningSavedCollectionException(Throwable cause){
+		super(cause);
+	}
 	
 }

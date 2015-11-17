@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import by.epam.tat.lecture2.task1.objects.ChocolateCandy;
 import by.epam.tat.lecture2.task1.objects.Gift;
 import by.epam.tat.lecture2.task1.objects.SugarCandy;
@@ -17,14 +16,14 @@ import by.epam.tat.lecture2.task1.utils.exceptions.OpeningSavedCollectionExcepti
 
 
 public class FileReaderSaver implements IReaderSaver {
-	final String file = "log.txt";
+	public final static String FILE = "log.txt";
 	/// if no sweets
 	@Override
 	public void saveGift(Gift gitf) {
 		List<Sweets> sweets = gitf.getSweets();
 		PrintWriter outPutStream = null;
 		try{
-			outPutStream = new PrintWriter(new FileWriter(file));
+			outPutStream = new PrintWriter(new FileWriter(FILE));
 			for (Sweets i : sweets){
 				String temp = i.toString();
 				outPutStream.println(temp);	
@@ -39,17 +38,21 @@ public class FileReaderSaver implements IReaderSaver {
 	}
 
 	@Override
-	public List<Sweets> getSavedGift() {
+	public List<Sweets> getSavedGift() throws OpeningSavedCollectionException {
 		List<Sweets> sweets = new ArrayList<Sweets>();
 		BufferedReader inPutStream = null;
-		try{
-			inPutStream = new BufferedReader(new FileReader(file));
-			String line;
-			String[] isLineParts;
-			String sweetName;
-			String producerName;
-			int price;
-			int weight;
+		try {
+			inPutStream = new BufferedReader(new FileReader(FILE));
+		} catch (FileNotFoundException e) {
+			throw new OpeningSavedCollectionException(e);
+		}
+		String line;
+		String[] isLineParts;
+		String sweetName;
+		String producerName;
+		int price;
+		int weight;
+		try {
 			while ((line = inPutStream.readLine()) != null){
 				isLineParts = line.split(", ");
 				sweetName = isLineParts[0].substring(6);
@@ -65,29 +68,16 @@ public class FileReaderSaver implements IReaderSaver {
 					sweets.add(new ChocolateCandy(sweetName, producerName, price, weight));	
 				}
 			}
-			
-		} catch (FileNotFoundException e) {
-			Communicator.out("The file can't be found out");
-			throw new OpeningSavedCollectionException();
-		} catch (IOException e) {
-			Communicator.out("Can't read file");
-			throw new OpeningSavedCollectionException();
 		} catch (NumberFormatException e) {
-			Communicator.out("Incorrect format of saved file. Please verify that price and weight are numbers");
-			throw new OpeningSavedCollectionException();
-		} catch (ArrayIndexOutOfBoundsException e) {
-			Communicator.out("Incorrect format of saved file. Please verify file");
-			throw new OpeningSavedCollectionException();
-		} catch (Throwable e) {
-			Communicator.out("Can't open file");
-			throw new OpeningSavedCollectionException();
-		} finally {
+			throw new OpeningSavedCollectionException(e);
+		} catch (IOException e) {
+			throw new OpeningSavedCollectionException(e);
+		}finally {
 			if (inPutStream != null){
 				try {
 					inPutStream.close();
 				} catch (IOException e) {
-					Communicator.out("Can't read file");
-					throw new OpeningSavedCollectionException();
+					throw new OpeningSavedCollectionException(e);
 				}
 			}
 		}
