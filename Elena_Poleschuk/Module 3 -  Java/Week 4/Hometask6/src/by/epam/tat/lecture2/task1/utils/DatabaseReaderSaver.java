@@ -29,6 +29,15 @@ public class DatabaseReaderSaver implements IReaderSaver {
 		return connection;
 	}
 	
+	private void closeConnection(){
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			Communicator.out(e.getMessage());
+		}
+		
+	}
+		
 	@Override
 	public List<Sweets> getSavedGift() throws OpeningSavedCollectionException {
 		Statement st = null;
@@ -51,6 +60,8 @@ public class DatabaseReaderSaver implements IReaderSaver {
 			throw new OpeningSavedCollectionException(e);
 		}
 		
+		closeConnection();
+		
 		try {
 			if (res != null){
 				res.close();
@@ -72,7 +83,7 @@ public class DatabaseReaderSaver implements IReaderSaver {
 	
 	@Override
 	public void saveGift(Gift gitf) {
-		// TODO Auto-generated method stub
+		Communicator.out("The method is not implemented");
 	}
 
 }
