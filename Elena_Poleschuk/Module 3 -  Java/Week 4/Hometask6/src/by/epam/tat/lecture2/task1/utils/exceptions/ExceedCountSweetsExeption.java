@@ -1,7 +1,7 @@
 package by.epam.tat.lecture2.task1.utils.exceptions;
 
 @SuppressWarnings("serial")
-public class ExceedCountSweetsExeption extends RuntimeException{
+public class ExceedCountSweetsExeption extends Exception{
 	private int maxCount;
 	
 	public ExceedCountSweetsExeption(int maxCount){
@@ -9,8 +9,7 @@ public class ExceedCountSweetsExeption extends RuntimeException{
 	}
 
 	public String getMessage() {
-		return "The gift includes maximum count of sweets:  " + maxCount
-				+ ". You can't add new sweet";
+		return "You are trying to add more sweets then possible. The gift can includes " + maxCount + " sweets ";
 	}
 
 }

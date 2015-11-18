@@ -6,21 +6,31 @@ import java.util.List;
 import by.epam.tat.lecture2.task1.objects.ChocolateCandy;
 import by.epam.tat.lecture2.task1.objects.Gift;
 import by.epam.tat.lecture2.task1.objects.Sweets;
+import by.epam.tat.lecture2.task1.utils.exceptions.OpeningSavedCollectionException;
 
 public class DatabaseReaderSaver implements IReaderSaver {
 	private Connection connection;
-	
-	public DatabaseReaderSaver (Connection connection){
-		super();
-		this.connection = connection;
-	}
-	
-	public Connection getConnection(){
+			
+	private Connection getConnection() throws OpeningSavedCollectionException{
+		String dbDriverName = "com.mysql.jdbc.Driver";
+		String dbUser= "root";
+		String dbPassword= "root";
+		String dbURL= "jdbc:mysql://localhost:3306/NY";
+		try {
+			Class.forName(dbDriverName);
+		} catch (ClassNotFoundException e) {
+			throw new OpeningSavedCollectionException(e);
+		}
+		try {
+			connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+		} catch (SQLException e) {
+			throw new OpeningSavedCollectionException(e);
+		}
 		return connection;
 	}
 	
 	@Override
-	public List<Sweets> getSavedGift() {
+	public List<Sweets> getSavedGift() throws OpeningSavedCollectionException {
 		Statement st = null;
 		ResultSet res = null;
 		List<Sweets> sweets = new ArrayList<Sweets>();
@@ -29,16 +39,16 @@ public class DatabaseReaderSaver implements IReaderSaver {
 			st = getConnection().createStatement();
 			res = st.executeQuery("SELECT * FROM Gift");
 		} catch (SQLException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		}
 		
 		try {
-			while(res.next()){  // only chocolate Sweets
+			while(res.next()){  
 				sweets.add(new ChocolateCandy(res.getString("sweetName"), res.getString("producerName"), 
 						res.getInt("price"), res.getInt("weight")));	
 			}
 		} catch (SQLException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		}
 		
 		try {
@@ -46,14 +56,14 @@ public class DatabaseReaderSaver implements IReaderSaver {
 				res.close();
 			}
 		} catch (SQLException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		}
 		try {
 			if (st != null){
 				st.close();
 			}
 		} catch (SQLException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		}
 		return sweets;
 	}

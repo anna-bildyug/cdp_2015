@@ -18,11 +18,12 @@ import org.xml.sax.SAXException;
 import by.epam.tat.lecture2.task1.objects.ChocolateCandy;
 import by.epam.tat.lecture2.task1.objects.Gift;
 import by.epam.tat.lecture2.task1.objects.Sweets;
+import by.epam.tat.lecture2.task1.utils.exceptions.OpeningSavedCollectionException;
 
 public class XmlReaderSaver implements IReaderSaver{
 	@Override
 
-	public List<Sweets> getSavedGift() {
+	public List<Sweets> getSavedGift() throws OpeningSavedCollectionException {
 		List<Sweets> sweets = new ArrayList<Sweets>();
 		String sweetName;
 		String producerName;
@@ -52,11 +53,11 @@ public class XmlReaderSaver implements IReaderSaver{
 			}
 
 		} catch (ParserConfigurationException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		} catch (SAXException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		} catch (IOException e) {
-			Communicator.out(e.getMessage());
+			throw new OpeningSavedCollectionException(e);
 		}
 		return sweets;
 	}

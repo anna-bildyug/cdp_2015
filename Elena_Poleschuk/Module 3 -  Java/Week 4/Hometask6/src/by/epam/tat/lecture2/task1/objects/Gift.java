@@ -9,6 +9,7 @@ import by.epam.tat.lecture2.task1.utils.comparators.NameComparator;
 import by.epam.tat.lecture2.task1.utils.comparators.PriceComparator;
 import by.epam.tat.lecture2.task1.utils.comparators.WeightComparator;
 import by.epam.tat.lecture2.task1.utils.exceptions.EmptyCollectionException;
+import by.epam.tat.lecture2.task1.utils.exceptions.ExceedCountSweetsExeption;
 
 
 public class Gift {	
@@ -21,10 +22,8 @@ public class Gift {
 	}
 	
 	// check for empty collection
-	public void checkGiftEmpty() throws EmptyCollectionException{
-		if (sweetCollection.isEmpty()){
-			throw new EmptyCollectionException("Error: The gift is empty");
-		}
+	public boolean isGiftEmpty(){
+		return (sweetCollection.isEmpty());
 	}
 	
 	// get size of gift
@@ -33,22 +32,31 @@ public class Gift {
 	}
 	
 	// add sweet to gift
-	public void addSweet (Sweets sweet){
-		sweetCollection.add(sweet);
+	public void addSweet (Sweets sweet) throws ExceedCountSweetsExeption{
+		int maxCount = 10;
+		if (getGiftSize() < 10){
+			sweetCollection.add(sweet);
+		}else{
+			throw new ExceedCountSweetsExeption(maxCount);
+		}
 	}
 	
 	//remove one sweet from gift
-	public void removeSweet(String sweetName){
+	public void removeSweet(String sweetName) throws EmptyCollectionException{
 		boolean nameExist = false;
-		for (Sweets i : sweetCollection){
-			if (i.getSweetName().equals(sweetName)){
-				sweetCollection.remove(i);
-				nameExist = true;
-				break;
+		if (isGiftEmpty() == false){
+			for (Sweets i : sweetCollection){
+				if (i.getSweetName().equals(sweetName)){
+					sweetCollection.remove(i);
+					nameExist = true;
+					break;
+				}
 			}
-		}
-		if (nameExist == false){
-			Communicator.out("There is no sweet with " + "\"" + sweetName + "\"" +" name.");
+			if (nameExist == false){
+				Communicator.out("There is no sweet with " + "\"" + sweetName + "\"" +" name.");
+			}
+		} else {
+			throw new EmptyCollectionException();
 		}
 	}
 	
@@ -60,27 +68,21 @@ public class Gift {
 	
 	//show the collection
 	public void printGiftInfo(){
-		try{
-			checkGiftEmpty();
 			for (Sweets i : sweetCollection){
-			Communicator.out(i.toString());
-			} 
-		}catch (EmptyCollectionException e){
-				Communicator.out(e.getMessage());
+				Communicator.out(i.toString());
 		}
 	}
 	
 	// define the gift's weight 
-	public int getSumWeight(){
+	public int getSumWeight() throws EmptyCollectionException{
 		int sumWeight = 0;
-		try{
-			checkGiftEmpty();
+		if (isGiftEmpty()){
+			throw new EmptyCollectionException();
+		}else {
 			for (Sweets i : sweetCollection){
 				sumWeight = sumWeight + i.getWeight();	
 			}
-		 }catch (EmptyCollectionException e){
-				Communicator.out(e.getMessage());
-		}
+		}	
 		return sumWeight;
 	}
 

@@ -1,9 +1,12 @@
 package by.epam.tat.lecture2.task1.utils.exceptions;
 
 @SuppressWarnings("serial")
-public class EmptyCollectionException extends RuntimeException {
+public class EmptyCollectionException extends Exception {
 
-	public EmptyCollectionException(String errorMessage){
-		super(errorMessage);
+	public EmptyCollectionException(){
+	}
+		
+	public String getMessage() {
+		return "The gift is empty";
 	}
 }
