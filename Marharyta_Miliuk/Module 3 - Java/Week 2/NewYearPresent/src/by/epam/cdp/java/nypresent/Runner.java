@@ -3,13 +3,12 @@ package by.epam.cdp.java.nypresent;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
-
 import by.epam.cdp.java.nypresent.beans.Bar;
 import by.epam.cdp.java.nypresent.beans.ChocolateCandy;
 import by.epam.cdp.java.nypresent.beans.Lollypop;
 import by.epam.cdp.java.nypresent.beans.Sweets;
+import by.epam.cdp.java.nypresent.storage.DBReaderWriter;
 import by.epam.cdp.java.nypresent.storage.FileReaderWriter;
-import by.epam.cdp.java.nypresent.storage.IOStreams;
 import by.epam.cdp.java.nypresent.utils.PrinterScanner;
 import by.epam.cdp.java.nypresent.validation.NoSuchCandyException;
 import by.epam.cdp.java.nypresent.validation.PresentStorageException;
@@ -19,100 +18,41 @@ public class Runner {
 	
 	public static void main (String []args) throws NoSuchCandyException, ClassNotFoundException, IOException, PresentStorageException {
 		
+		boolean exit = false;
+		if (exit == true){
+			System.exit(0);
+		}
+		while (exit == false){
+			
 		int choise = Communicator.showTheMenu();
 		
 		Present present = null;
-		switch (choise){
 		
+		switch (choise){
 		case 1:
+			present = PresentCollector.putCandiesIntoPresent();
+		    present.getPresentsWeight();//calling methods from Present class to define weight, sort candies and find exact candy	
+		    present.sortCollectionByName();
+		    PrinterScanner.printCollection(present.getColection());		
+		    PresentCollector.getCandyFromPresent(present);		
+		    PresentCollector.getConfirmation(present);
+			break;
 			
-			present = new Present ();
-			int number = 0;
-			try{
-			
-				number = Communicator.askNumberOfCandies();
-			}
-			catch (InputMismatchException e) {
-				
-				PrinterScanner.printMessage("Please, enter number of candies! Try again");
-				
-			} catch (IllegalArgumentException e) {
-				
-				PrinterScanner.printMessage("Please, enter only positive numbers!");
-				
-			} catch (NullPointerException e) {
-				
-				PrinterScanner
-						.printMessage("You can't leave the present empty! Please, add at least one candy to the present!");
-				
-			}
-				    for (int i = 0; i < number; i++){
-				    	
-				    	String typeOfCandy = null;
-						try {
-						
-						 typeOfCandy  = Communicator.askTypeOfCandy();
-						 
-						}
-						
-						catch (WrongTypeOfCandyException e){
-							PrinterScanner.printMessage("Wrong type of candy! Please, enter Bar, Lollypop or Chocolate Candy");
-						}
-				    	
-					     if ("Bar".equals(typeOfCandy)){
-					    	 String nameOfCandy = Communicator.askNameOfCandy();
-					    	 
-					    	 present.collection.add(new Bar(nameOfCandy));	 
-					     }
-					     else if ("Lollypop".equals(typeOfCandy)){
-					    	 
-					    	 String nameOfCandy = Communicator.askNameOfCandy();
-					    	 present.collection.add(new Lollypop(nameOfCandy));
-					     }
-					     else if ("Chocolate Candy".equals(typeOfCandy)){
-					    	 String nameOfCandy = Communicator.askNameOfCandy();
-					    	 present.collection.add(new ChocolateCandy(nameOfCandy));
-					     }
-					     else {
-					    	 System.exit(i);
-					     }  
-				}
-				    present.getPresentsWeight();//calling methods from Present class to define weight, sort candies and find exact candy
-					
-				    present.sortCollectionByName();
-				    PrinterScanner.printCollection(present.getColection());
-						
-				    PrinterScanner.printMessage("Which candy do you want to eat?");
-				        
-				    String candyName = PrinterScanner.scanMessage();
-				    
-						try{
-							List<Sweets> sweets = present.findCandyByName(candyName);
-							PrinterScanner.printCollection(sweets);
-							
-						}
-						catch (NoSuchCandyException e){
-							PrinterScanner.printMessage("There is no such candy in your present!");
-						}
-						
-				    String confirmation = Communicator.askAboutSaving();
-				    switch (confirmation){
-				    
-				    case "y":
-				    	FileReaderWriter fileExport = new FileReaderWriter();
-				    	fileExport.exportPresent(present);
-				    
-			        case "n":
-			        	System.exit(0);
-				    }
 		case 2:
 			FileReaderWriter fileImport = new FileReaderWriter();
-			
-			PrinterScanner.printObject(fileImport.importPresent());
+			Present savedPresent = fileImport.importPresent();
+			PrinterScanner.printObject(savedPresent.toString());
+			break;
 			
 		case 3:
-			System.exit(choise);
-		
+			DBReaderWriter tableImport = new DBReaderWriter();
+			PrinterScanner.printObject(tableImport.importPresent());
+			break;
+
+		case 4:
+			exit = true;
+			break;
 	}
   }
+	}
 }

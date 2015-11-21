@@ -5,7 +5,14 @@ public abstract class Sweets implements Comparable <Sweets> {//implementing comp
 	private int weight;
 	private String name;
 	private String mainIngredient;
+	private TypeOfCandy candyType;
 	
+	public TypeOfCandy getCandyType() {
+			return candyType;
+		}
+	public void setCandyType (TypeOfCandy candyType){
+			this.candyType = candyType;
+		}
 	public int getWeight(){
 		return weight;
 	}
@@ -24,12 +31,13 @@ public abstract class Sweets implements Comparable <Sweets> {//implementing comp
 	public void setMainIngredient(String mainIngredient){
 		this.mainIngredient = mainIngredient;
 	}
+	
 	public int compareTo(Sweets compareSweets) {//creating compare method to make objects comparable
 		int compareWeight = ((Sweets) compareSweets).getWeight(); 
 		return this.weight - compareWeight;
 }
 	@Override 
 	public String toString (){//overriding toString method to print exact message to the console
-		return "Name of candy: " + name + " " +  "Weight: " + weight + " " + "Main ingridient: " + mainIngredient;
+		return "Type: " + candyType.getValue() + " " + "Name of candy: " + name + " " +  "Weight: " + weight + " " + "Main ingredient: " + mainIngredient;
 	}
 }
