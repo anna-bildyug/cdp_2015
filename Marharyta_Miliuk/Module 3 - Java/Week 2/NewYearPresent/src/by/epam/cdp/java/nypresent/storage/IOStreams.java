@@ -8,7 +8,7 @@ import by.epam.cdp.java.nypresent.validation.PresentStorageException;
 
 public interface IOStreams {
 	
-	String importPresent () throws PresentStorageException;	
+	Present importPresent () throws PresentStorageException;	
 	void exportPresent (Present present) throws PresentStorageException;
 	
 }

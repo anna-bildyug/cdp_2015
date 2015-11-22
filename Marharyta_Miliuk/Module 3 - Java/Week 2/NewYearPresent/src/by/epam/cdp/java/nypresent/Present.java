@@ -1,11 +1,8 @@
 package by.epam.cdp.java.nypresent;
 
-
 import java.util.*;
 import java.util.stream.Collectors;
-
 import by.epam.cdp.java.nypresent.beans.*;
-import by.epam.cdp.java.nypresent.utils.PrinterScanner;
 import by.epam.cdp.java.nypresent.validation.NoSuchCandyException;
 
 
@@ -59,4 +56,14 @@ public class Present{
     	     }
     	return presentWeight;
     }
+	
+	public void addCandy(Sweets candy){
+		
+		collection.add(candy);
+	}
+	
+	@Override 
+	public String toString (){
+		return "Present:" + collection;
+	}
 }

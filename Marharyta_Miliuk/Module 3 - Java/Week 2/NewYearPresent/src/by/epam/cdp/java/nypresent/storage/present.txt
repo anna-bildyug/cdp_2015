@@ -1,1 +1,2 @@
-[Name of candy: k Weight: 15 Main ingridient: Nougat, Name of candy: r Weight: 5 Main ingridient: Caramel]
+Type: Lollypop Name of candy: ffd Weight: 5 Main ingredient: Caramel
+Type: Bar Name of candy: terey Weight: 15 Main ingredient: Nougat
