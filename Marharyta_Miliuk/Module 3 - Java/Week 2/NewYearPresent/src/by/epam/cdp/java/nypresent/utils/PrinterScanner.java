@@ -8,7 +8,9 @@ import by.epam.cdp.java.nypresent.beans.Sweets;
 public class PrinterScanner {
 	
 	public static void printCollection (List<Sweets> collection){
-		System.out.println(collection);
+		for (Sweets sweet : collection){
+		System.out.println(sweet);
+		}
 	}
 	
 	public static void printObject (Object object){

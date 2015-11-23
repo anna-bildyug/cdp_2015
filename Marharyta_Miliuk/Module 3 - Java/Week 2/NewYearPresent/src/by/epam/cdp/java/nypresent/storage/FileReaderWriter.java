@@ -79,7 +79,7 @@ public class FileReaderWriter implements IOStreams {
 			br.close();
 		}
 		catch (IOException | WrongTypeOfCandyException e) {
-			throw new PresentStorageException("Something went wrong");
+			throw new PresentStorageException(e);
 		}
 
 		return present;

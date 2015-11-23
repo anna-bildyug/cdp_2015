@@ -66,7 +66,7 @@ public class DBReaderWriter implements IOStreams {
 			DbUtils.closeQuietly(result);
 		} 
 		catch (SQLException e) {
-			throw new PresentStorageException ("Something went wrong with the database");
+			throw new PresentStorageException (e);
 		}
 	return present;
    }
@@ -74,6 +74,6 @@ public class DBReaderWriter implements IOStreams {
 	@Override
 	public void exportPresent(Present present) throws PresentStorageException {
 		
-		throw new PresentStorageException("This functionality wasn't implemented");
+		PrinterScanner.printObject("Sorry, the functionality is not implemented yet");
 	}
 }

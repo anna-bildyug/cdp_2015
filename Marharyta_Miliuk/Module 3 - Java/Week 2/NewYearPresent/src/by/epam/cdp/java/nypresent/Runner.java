@@ -42,6 +42,7 @@ public class Runner {
 			case 4:
 				XMLReaderWriter xmlImport = new XMLReaderWriter();
 				PrinterScanner.printObject(xmlImport.importPresent());
+				break;
 				
 			case 5:
 				exit = true;
