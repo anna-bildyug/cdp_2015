@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.commons.dbutils.DbUtils;
 import by.epam.cdp.java.nypresent.Present;
 import by.epam.cdp.java.nypresent.beans.Bar;
 import by.epam.cdp.java.nypresent.beans.ChocolateCandy;
 import by.epam.cdp.java.nypresent.beans.Lollypop;
+import by.epam.cdp.java.nypresent.beans.Sweets;
 import by.epam.cdp.java.nypresent.utils.PrinterScanner;
 import by.epam.cdp.java.nypresent.validation.PresentStorageException;
 
@@ -17,7 +20,7 @@ public class DBReaderWriter implements IOStreams {
 	
      public static final String query = "SELECT type, name, weight, ingredient FROM present";
 	  
-	private Connection establishConnection(){
+	private Connection establishConnection() throws PresentStorageException{
 		Connection connection = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -25,10 +28,11 @@ public class DBReaderWriter implements IOStreams {
 			   ("jdbc:mysql://localhost:3306/Present", "root", "12345");
 		}
 		catch (InstantiationException| IllegalAccessException| ClassNotFoundException| SQLException e){
-			PrinterScanner.printMessage("Oops! Something went wrong");
+			throw new PresentStorageException("Oops! Something went wrong");
 		}
 			return connection;
 		}
+	
 	@Override
 	public Present importPresent() throws PresentStorageException {
 		Present present = new Present();
@@ -42,17 +46,18 @@ public class DBReaderWriter implements IOStreams {
 				String candyName = result.getString("name");
 				int candyWeight = result.getInt("weight");
 				String mainIngredient = result.getString("ingredient");
+
 				switch (candyType){
 				case "Bar":
-					present.collection.add(new Bar(candyName, candyWeight, mainIngredient));
+					present.getCollection().add(new Bar(candyName, candyWeight, mainIngredient));
 				break;
 				
 				case "Lollypop":
-					present.collection.add(new Lollypop(candyName, candyWeight, mainIngredient));
+					present.getCollection().add(new Lollypop(candyName, candyWeight, mainIngredient));
 				break;
 				
 				case "Chocolate Candy":
-					present.collection.add(new ChocolateCandy(candyName, candyWeight, mainIngredient));
+					present.getCollection().add(new ChocolateCandy(candyName, candyWeight, mainIngredient));
 					break;	
 				}			
 		}
@@ -61,13 +66,14 @@ public class DBReaderWriter implements IOStreams {
 			DbUtils.closeQuietly(result);
 		} 
 		catch (SQLException e) {
-			PrinterScanner.printMessage("Oops! Something went wrong with your database");
+			throw new PresentStorageException ("Something went wrong with the database");
 		}
 	return present;
    }
 
 	@Override
 	public void exportPresent(Present present) throws PresentStorageException {
-
+		
+		throw new PresentStorageException("This functionality wasn't implemented");
 	}
 }
