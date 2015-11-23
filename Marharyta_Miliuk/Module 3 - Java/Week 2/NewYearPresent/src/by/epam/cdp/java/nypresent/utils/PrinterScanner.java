@@ -7,10 +7,6 @@ import by.epam.cdp.java.nypresent.beans.Sweets;
 
 public class PrinterScanner {
 	
-	public static void printMessage (String message){//creating methods for printing strings out to the console
-		System.out.println(message);
-	}
-	
 	public static void printCollection (List<Sweets> collection){
 		System.out.println(collection);
 	}
