@@ -8,9 +8,7 @@ import org.testng.xml.XmlSuite;
 
 public class TestRunner {
     public static void main(String[] args){
-     //   TestListenerAdapter tla = new TestListenerAdapter();
         TestNG tng = new TestNG();
-      //  tng.addListener(tla);
 
         XmlSuite suite = new XmlSuite();
         suite.setName("TmpSuite");
