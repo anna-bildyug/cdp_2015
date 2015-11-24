@@ -1,6 +1,7 @@
 package by.epam.cdp.java.nypresent.storage;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
@@ -17,6 +18,7 @@ import org.w3c.dom.CharacterData;
 import by.epam.cdp.java.nypresent.beans.Bar;
 import by.epam.cdp.java.nypresent.beans.ChocolateCandy;
 import by.epam.cdp.java.nypresent.beans.Lollypop;
+import by.epam.cdp.java.nypresent.utils.PrinterScanner;
 import by.epam.cdp.java.nypresent.validation.PresentStorageException;
 
 
@@ -40,10 +42,7 @@ public class XMLReaderWriter implements IOStreams{
 		try {
 		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		
-	    InputSource is = new InputSource();
-	    is.setCharacterStream(new StringReader(FILEPATH));
-		
-	    Document doc = db.parse(is);
+	    Document doc = db.parse(new File(FILEPATH));
 	    NodeList nodes = doc.getElementsByTagName("candy");
 	    
 	    for (int i = 0; i < nodes.getLength(); i++) {
@@ -81,7 +80,7 @@ public class XMLReaderWriter implements IOStreams{
 	    
 	} }
 		catch (ParserConfigurationException | SAXException | IOException e) {
-		throw new PresentStorageException("Something went wrong");
+		throw new PresentStorageException(e);
 	}
 		return present;
 	}
@@ -90,6 +89,7 @@ public class XMLReaderWriter implements IOStreams{
 	@Override
 	public void exportPresent(Present present) throws PresentStorageException {
 		
+		PrinterScanner.printObject("Sorry, the functionality is not implemented yet");
 		
 	}
 	
