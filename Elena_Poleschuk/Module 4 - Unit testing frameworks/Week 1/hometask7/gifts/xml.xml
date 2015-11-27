@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gift>
+	<sweet>
+		<sweetName>sweetName1</sweetName>
+		<producerName>sweetProducer</producerName>
+		<price>1</price>
+		<weight>5</weight>	
+	</sweet>
+</gift> 
