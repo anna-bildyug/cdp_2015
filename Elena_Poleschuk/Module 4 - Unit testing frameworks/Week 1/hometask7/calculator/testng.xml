@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Calculator" parallel="methods" thread-count="3">
+  <test name="MultAndDivideTests" >
+   	<groups>
+       	<run>
+       		<include name="div"/>
+       		<include name="mult"/>
+       	</run>	
+   	</groups>
+    <classes>
+       <class name="tests.MultAndDivideTests" />
+    </classes>
+  </test>
+  <test name="PositiveNegativeTest" >
+    <classes>
+       <class name="tests.PositiveNegativeTest" />
+    </classes>
+  </test>
+  <test name="SumAndSubCalculationTest" >
+    <classes>
+       <class name="tests.SumAndSubCalculationTest" />
+    </classes>
+  </test>
+    <test name="TrigonometryTest" >
+    <classes>
+       <class name="tests.TrigonometryTest" />
+    </classes>
+  </test>
+    <test name="PowerAndRadicalTest" >
+    <classes>
+       <class name="tests.PowerAndRadicalTest" />
+    </classes>
+  </test>
+</suite>

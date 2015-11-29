@@ -1,0 +1,1 @@
+Name: sweetName1, Producer: sweetProducer, Price: 1, Weight: 5
