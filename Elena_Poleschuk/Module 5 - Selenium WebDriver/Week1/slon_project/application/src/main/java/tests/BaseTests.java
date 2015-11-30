@@ -11,9 +11,9 @@ import org.testng.annotations.BeforeSuite;
 import pages_usage.CommonMethods;
 
 public class BaseTests{
-	private final static String URL = "https://platform-scmpl.application.qas.supplyon.com/logon/logonServlet";
-	private final static String LOGIN = "SLE35CP1_Admin";
-	private final static String PASSWORD = "London2+";
+	private final static String URL = "https://platform-scmpl";
+	private final static String LOGIN = "Admin";
+	private final static String PASSWORD = "pass";
 	WebDriver driver;
 	
 	@BeforeSuite
