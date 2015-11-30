@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SLON - project">
+  <test name="CreateArticle" >
+    <classes>
+       <class name="tests.ArticleWeightsAndMeasuresTests" />
+    </classes>
+  </test>
+</suite>
