@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Present tests">
+<test name = "Present Test">
+<groups>
+<run>
+<include name="storage"/>
+<include name="present"/>
+</run>
+</groups>
+<classes>
+<class name = "by.epam.cdp.java.nypresent.tests.StorageTests" />
+<class name = "by.epam.cdp.java.nypresent.tests.PresentTests" />
+</classes>
+</test>
+</suite>  	
+
