@@ -9,44 +9,42 @@ import org.testng.annotations.Factory;
 public class BasicOperationsTests {
 	
 	private double firstNumber;
-	private double secondNumber;
 	
   @Factory(dataProvider = "dataProvider")
-   public BasicOperationsTests (double firstNumber,double secondNumber){
+   public BasicOperationsTests (double firstNumber){
 	  this.firstNumber = firstNumber;
-	  this.secondNumber = secondNumber;
   }
   
   @DataProvider
   public static Object [][] dataProvider(){		  
-	  return new Object [][] {{8,12},{-10,3},{10,0}};	 		  
+	  return new Object [][] {{10}};	 		  
   }
 	
   @Test (groups = "Math operations")
   public void additionTest() {
 	Calculator calc = new Calculator();
-	double result = calc.addition(firstNumber, secondNumber);
-	Assert.assertEquals(result, firstNumber + secondNumber);
+	double result = calc.addition(firstNumber, 2.0);
+	Assert.assertEquals(result, 12.0);
   }
   
   @Test (groups = "Math operations")
   public void divisionTest (){
 	  Calculator calc = new Calculator();
-	  double result = calc.division(firstNumber, secondNumber);
-	  Assert.assertEquals(result, firstNumber / secondNumber);
+	  double result = calc.division(firstNumber, 2.0);
+	  Assert.assertEquals(result, 5.0);
   }
   
   @Test (groups = "Math operations")
   public void testMultiplication (){
 	  Calculator calc = new Calculator();
-	  double result = calc.multiplication(firstNumber, secondNumber);
-	  Assert.assertEquals(result, firstNumber * secondNumber);
+	  double result = calc.multiplication(firstNumber, 2.0);
+	  Assert.assertEquals(result, 20.0);
   }
   
   @Test (groups = "Math operations")
   public void testSubstraction (){
 	  Calculator calc = new Calculator();
-	  double result = calc.subtraction(firstNumber, secondNumber);
-	  Assert.assertEquals(result, firstNumber - secondNumber);
+	  double result = calc.subtraction(firstNumber, 2.0);
+	  Assert.assertEquals(result, 8.0);
   }
 }
