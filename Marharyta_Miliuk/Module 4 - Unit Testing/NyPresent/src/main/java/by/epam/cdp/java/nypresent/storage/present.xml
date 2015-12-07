@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<present>
+    <candy>
+       <candyType>Bar</candyType>
+       <candyName>Mars</candyName>
+       <candyWeight>50</candyWeight>
+       <mainIngredient>Nougat</mainIngredient>
+    </candy>
+    <candy>
+       <candyType>Lollypop</candyType>
+       <candyName>Chupa-Chups</candyName>
+       <candyWeight>20</candyWeight>
+       <mainIngredient>Caramel</mainIngredient>
+    </candy>
+</present> 
+
