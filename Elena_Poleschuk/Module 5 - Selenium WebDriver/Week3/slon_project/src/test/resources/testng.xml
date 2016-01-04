@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SLON - project">
+  <test name="CreateSupplierArticle" >
+      <classes>
+       <class name="selenium.webdriver.tests.SupplierArticleTest" />
+    </classes>
+  </test>
+</suite>
