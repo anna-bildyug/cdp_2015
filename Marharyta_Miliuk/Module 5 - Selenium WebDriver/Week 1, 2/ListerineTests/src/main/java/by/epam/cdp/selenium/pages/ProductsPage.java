@@ -1,5 +1,8 @@
 package by.epam.cdp.selenium.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -13,17 +16,27 @@ public class ProductsPage extends Page {
 	@FindBy (partialLinkText = "ORIGINAL")
 	private WebElement productLink;
 	
-	@FindBy (className = "fsrCloseBtn")
+	@FindBy (className = "fsrDeclineButtonContainer")
 	private WebElement foreseeCloseButton;
+	
+	@FindBy (id = "edit-submit-products")
+	private WebElement filterResultsButton;
+	
+	@FindBy (partialLinkText = "Floss")
+	private List<WebElement> flossProducts;
 	
 	public ProductsPage(WebDriver driver){ 
         super (driver);
-        PageFactory.initElements(this.driver, driver);
+        PageFactory.initElements(this.driver, this);
     }
 	
 	public void clickForeseeClose (){
-		foreseeCloseButton.click();
-	}
+		try{
+		foreseeCloseButton.click();}
+		catch (NoSuchElementException|ElementNotVisibleException e){
+		}
+		}
+	
 	
 	public ProductPage clickOnProductLink(){
 		try{
@@ -36,8 +49,22 @@ public class ProductsPage extends Page {
 		return new ProductPage(driver);
 	}
 	
+	public void filterProductList (String filterID){
+		try{
+		clickForeseeClose();
+        driver.findElement(By.id(filterID)).click();}
+		
+		catch (NoSuchElementException|ElementNotVisibleException e){
+			driver.findElement(By.id(filterID)).click();
+		}
+	}
+	public ProductsPage clickFilterButton (){
+		filterResultsButton.click();
+		return new ProductsPage(driver);
+	}
+	public List <WebElement> filteredProducts (){
+		List <WebElement> filteredProducts;
+		return filteredProducts = flossProducts;	
+	}
 	
-
-	
-
 }

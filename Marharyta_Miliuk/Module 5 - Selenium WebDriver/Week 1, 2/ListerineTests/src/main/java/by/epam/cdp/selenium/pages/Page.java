@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import by.epam.cdp.selenium.driver.Driver;
+
 public abstract class Page {
 
-	protected final WebDriver driver;
+	protected WebDriver driver = Driver.getInstance();
 	
     public Page(WebDriver driver){
     	this.driver = driver;
