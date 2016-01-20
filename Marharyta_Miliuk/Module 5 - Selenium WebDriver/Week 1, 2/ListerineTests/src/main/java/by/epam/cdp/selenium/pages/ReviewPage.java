@@ -35,10 +35,13 @@ public class ReviewPage extends Page {
 	@FindBy (css = "#BVButtonSubmitID > button")
 	private WebElement submitButton;
 	
+	@FindBy (tagName = "body" )
+	private WebElement reviewPage;
+	
 
 	public ReviewPage(WebDriver driver){ 
         super(driver);
-        PageFactory.initElements(this.driver, driver);
+        PageFactory.initElements(this.driver, ReviewPage.class);
     }
 	
 	public void rateProductWithStars (){
@@ -89,5 +92,8 @@ public class ReviewPage extends Page {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("arguments[0].scrollIntoView(true);",submitButton);
 		return submitButton;
+	}
+	public String getTextFromPage (){
+		return reviewPage.getText();
 	}
 }

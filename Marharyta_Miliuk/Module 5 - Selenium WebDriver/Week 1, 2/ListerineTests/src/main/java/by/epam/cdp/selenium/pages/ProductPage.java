@@ -7,13 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ProductPage extends Page{
 	
-	@FindBy (linkText = "Write a review")
+	@FindBy (xpath = "//*[@id=\"content\"]/div[4]/div/div/div[2]/div/div/div/span/div/a")
 	private WebElement writeReviewButton;
 	
 
 	public ProductPage(WebDriver driver){ 
         super(driver);
-        PageFactory.initElements(this.driver, driver);
+        PageFactory.initElements(this.driver, this);
     }
 	
 	public ReviewPage clickReviewButton (){

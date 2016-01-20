@@ -5,19 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainPage extends Page {	
+public class MainPage extends Page {
 	
-	@FindBy(linkText = "Products")
+	@FindBy(partialLinkText = "Products")
 	private WebElement productsBar;
 
 	public MainPage(WebDriver driver){ 
         super (driver);
-        PageFactory.initElements(this.driver, driver);
+        PageFactory.initElements(this.driver, this);
     }
 	
 	public ProductsPage clickOnProductsBar (){
 		productsBar.click();
-		return new ProductsPage(driver);
-		
+		return new ProductsPage(driver);	
 	}
 }
