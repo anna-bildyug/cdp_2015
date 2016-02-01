@@ -12,8 +12,8 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(strict = true, plugin = { "pretty", "json:target/Cucumber.json", "html:target/cucumber-html-report" },
-//features = "src/test/resources/com.epam.by.tests/")
-features = "src/test/resources/com.epam.by.tests/register.feature")
+features = "src/test/resources/com.epam.by.tests/")
+//features = "src/test/resources/com.epam.by.tests/register.feature")
 public class Runner {
 	protected static WebDriver driver;
 

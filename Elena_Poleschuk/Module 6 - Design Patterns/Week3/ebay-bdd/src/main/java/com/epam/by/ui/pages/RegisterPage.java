@@ -2,7 +2,6 @@ package com.epam.by.ui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,11 +10,14 @@ public class RegisterPage extends AbstractPage {
 	@FindBy(xpath = ".//*[@id='email']")
 	private WebElement emailField;
 
-	@FindBy(xpath = ".//*[@id='remail_w']")
+	@FindBy(xpath = ".//*[@id='remail']")
 	private WebElement emailReenterField;
 
-	@FindBy(xpath = ".//*[@id='email']")
+	@FindBy(xpath = ".//*[@id='email_w']")
 	private WebElement errorEmailNotification;
+	
+	@FindBy(xpath = ".//*[@id='sbtBtn']")
+	private WebElement submitButton;
 
 	public RegisterPage(WebDriver driver) {
 		super(driver);
@@ -30,10 +32,14 @@ public class RegisterPage extends AbstractPage {
 	}
 
 	public RegisterPage setReEmail(String email) {
-		emailField.sendKeys(email);
+		emailReenterField.sendKeys(email);
 		return this;
 	}
 
+	public  RegisterPage pressSubmit (){
+		submitButton.click();
+		return this;
+	}
 	/*
 	 * @FindBy(xpath = ".//*[@id='PASSWORD']") private WebElement passwordField;
 	 * 
@@ -42,10 +48,6 @@ public class RegisterPage extends AbstractPage {
 	 */
 
 	// change focus
-	public RegisterPage leaveField() {
-		new Actions(driver).moveByOffset(1, 1).build().perform();
-		return this;
-	}
 
 	public String getErrorEmailNotification() {
 		return errorEmailNotification.getText();

@@ -127,7 +127,7 @@ public class BaseStepsDef extends Runner {
 	@When("^I set email \"([^\"]*)\"$")
 	public void iSetEmail(String email) {
 		registerPage.setEmail(email);
-		registerPage.leaveField();
+		registerPage.pressSubmit();
 	}
 
 	@Then("^the error notification \"([^\"]*)\" is displayed")
