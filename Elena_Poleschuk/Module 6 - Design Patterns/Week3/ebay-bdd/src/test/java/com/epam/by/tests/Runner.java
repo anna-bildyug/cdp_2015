@@ -16,7 +16,8 @@ features = "src/test/resources/com.epam.by.tests/")
 //features = "src/test/resources/com.epam.by.tests/register.feature")
 public class Runner {
 	protected static WebDriver driver;
-
+	protected final static String URL_MAIN_PAGE = "http://www.ebay.com/";
+	
 	@BeforeClass
 	public static void initSelenium() {
 		driver = WebDriverSingleton.getInstance();
