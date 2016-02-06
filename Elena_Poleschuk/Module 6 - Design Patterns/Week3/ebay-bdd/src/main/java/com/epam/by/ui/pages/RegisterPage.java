@@ -15,7 +15,7 @@ public class RegisterPage extends AbstractPage {
 
 	@FindBy(xpath = ".//*[@id='email_w']")
 	private WebElement errorEmailNotification;
-	
+
 	@FindBy(xpath = ".//*[@id='sbtBtn']")
 	private WebElement submitButton;
 
@@ -23,7 +23,7 @@ public class RegisterPage extends AbstractPage {
 		super(driver);
 		PageFactory.initElements(this.driver, this);
 		driver.switchTo().frame("regFrame");
-		
+
 	}
 
 	public RegisterPage setEmail(String email) {
@@ -36,18 +36,10 @@ public class RegisterPage extends AbstractPage {
 		return this;
 	}
 
-	public  RegisterPage pressSubmit (){
+	public RegisterPage pressSubmit() {
 		submitButton.click();
 		return this;
 	}
-	/*
-	 * @FindBy(xpath = ".//*[@id='PASSWORD']") private WebElement passwordField;
-	 * 
-	 * public RegisterPage setPassword(String password){
-	 * emailField.sendKeys(password); return this; }
-	 */
-
-	// change focus
 
 	public String getErrorEmailNotification() {
 		return errorEmailNotification.getText();
