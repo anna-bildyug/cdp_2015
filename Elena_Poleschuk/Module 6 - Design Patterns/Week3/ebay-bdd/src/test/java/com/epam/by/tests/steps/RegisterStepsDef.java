@@ -31,6 +31,7 @@ public class RegisterStepsDef extends Runner {
 	@When("^I set email \"([^\"]*)\"$")
 	public void iSetEmail(String email) {
 		registerPage.setEmail(email);
+		registerPage.setReEmail(email);
 		registerPage.pressSubmit();
 	}
 
