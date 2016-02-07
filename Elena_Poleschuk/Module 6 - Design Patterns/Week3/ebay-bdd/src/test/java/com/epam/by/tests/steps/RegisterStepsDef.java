@@ -2,11 +2,12 @@ package com.epam.by.tests.steps;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-
+import org.openqa.selenium.WebDriver;
+import com.epam.by.core.webdriver.WebDriverSingleton;
 import com.epam.by.tests.Runner;
+import com.epam.by.tests.TestProperties;
 import com.epam.by.ui.pages.RegisterPage;
 import com.epam.by.ui.pages.TopMenu;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,12 +16,14 @@ public class RegisterStepsDef extends Runner {
 
 	private TopMenu topMenu;
 	private RegisterPage registerPage;
-
-	// register
+	protected static TestProperties testProperties;
+	private WebDriver driver;
 
 	@Given("^I open register form$")
 	public void iOpenRegisterForm() {
-		driver.get(URL_MAIN_PAGE);
+		testProperties = TestProperties.getInstance();
+		driver = WebDriverSingleton.getInstance();
+		driver.get(testProperties.getURLMain());
 		topMenu = new TopMenu(driver);
 		registerPage = topMenu.goToRegisterPage();
 	}
@@ -28,6 +31,7 @@ public class RegisterStepsDef extends Runner {
 	@When("^I set email \"([^\"]*)\"$")
 	public void iSetEmail(String email) {
 		registerPage.setEmail(email);
+		registerPage.setReEmail(email);
 		registerPage.pressSubmit();
 	}
 

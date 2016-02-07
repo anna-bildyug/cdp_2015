@@ -2,8 +2,9 @@ package com.epam.by.tests.steps;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-
-import com.epam.by.tests.Runner;
+import org.openqa.selenium.WebDriver;
+import com.epam.by.core.webdriver.WebDriverSingleton;
+import com.epam.by.tests.TestProperties;
 import com.epam.by.ui.pages.ItemDetailsPage;
 import com.epam.by.ui.pages.MainPage;
 import com.epam.by.ui.pages.SearchResultPage;
@@ -11,17 +12,19 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class ItemStepsDef extends Runner {
+public class ItemStepsDef {
 	private MainPage mainPage;
 	private SearchResultPage searchResultPage;
 	private ItemDetailsPage itemDetailsPage;
-
+	private WebDriver driver;
+	protected static TestProperties testProperties;
 	private String nameItem;
 
-	// open details
 	@Given("^I find item \"([^\"]*)\"$")
 	public void iFindItem(String searchRequest) {
-		driver.get(URL_MAIN_PAGE);
+		testProperties = TestProperties.getInstance();
+		driver = WebDriverSingleton.getInstance();
+		driver.get(testProperties.getURLMain());
 		mainPage = new MainPage(driver);
 		mainPage.setSearchRequest(searchRequest);
 		searchResultPage = mainPage.perfomSearch();
