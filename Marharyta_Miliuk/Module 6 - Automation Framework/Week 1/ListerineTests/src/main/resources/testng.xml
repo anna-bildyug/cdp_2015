@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Listerine tests">
+<test name="Review Tests">
+<groups>
+<run>
+<include name="Review Tests"/>
+</run>
+</groups>
+<classes>
+<class name="by.epam.cdp.selenium.test.ArticlePageTest"/>
+</classes>
+</test>
+</suite>  	
